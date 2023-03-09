@@ -1,0 +1,16 @@
+ORG 0000H
+;MOV P0,#0XFF
+LOOP:MOV A,P0  ; Moving the port content to the accumulator inorder nknow the value present in the Port0
+ANL A,#0X03 ;AND operation is done with accumulator content(that is the data present in the port0)and immediate data and after operation is performed the content is stored in the accumulator
+CJNE A,#0X00,LED_OFF ; now the value of accumulator is compared immediate data and if the value is equal not equal to zero then the led will be off
+CLR P0.2 ;and if the value is zero ,then the LED gets ON
+SJMP DELAY
+LED_OFF:SETB P0.2;OFF the led(setting up the pin)
+SJMP LOOP
+
+
+
+DELAY:MOV R1,#0X10
+LOOP1:DJNZ R1,LOOP1
+RET
+ END 
